@@ -274,3 +274,41 @@ CREATE TABLE proyecto_magin.usuario_rol (
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE proyecto_magin.categoria (
+	id INT auto_increment NOT NULL,
+	abreviatura varchar(5) NULL,
+	nombre varchar(80) NULL,
+	descripcion TEXT NULL,
+	CONSTRAINT categoria_pk PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE proyecto_magin.etiqueta (
+	id INT auto_increment NOT NULL,
+	nombre varchar(80) NULL,
+	CONSTRAINT etiqueta_pk PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE proyecto_magin.ticket_tarea_detalle (
+	id INT auto_increment NOT NULL,
+	usuario_id_responsable INT NULL,
+	valoracion_inicial TEXT NULL,
+	categoria_id INT NULL,
+	etiqueta_id INT NULL,
+	fecha_asignacion DATETIME NULL,
+	fecha_devolucion DATETIME NULL,
+	CONSTRAINT ticket_tarea_detalle_pk PRIMARY KEY (id),
+	CONSTRAINT ticket_tarea_detalle_usuario_FK FOREIGN KEY (usuario_id_responsable) REFERENCES proyecto_magin.usuario(id),
+	CONSTRAINT ticket_tarea_detalle_categoria_FK FOREIGN KEY (categoria_id) REFERENCES proyecto_magin.categoria(id),
+	CONSTRAINT ticket_tarea_detalle_etiqueta_FK FOREIGN KEY (etiqueta_id) REFERENCES proyecto_magin.etiqueta(id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
+
