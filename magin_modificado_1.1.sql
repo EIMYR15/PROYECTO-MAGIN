@@ -312,3 +312,34 @@ ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 
+CREATE TABLE proyecto_magin.permiso (
+	id INT auto_increment NOT NULL,
+	nombre varchar(100) NULL,
+	CONSTRAINT permiso_pk PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE proyecto_magin.item (
+	id INT auto_increment NOT NULL,
+	nombre varchar(100) NULL,
+	CONSTRAINT item_pk PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE proyecto_magin.rol_permiso_item (
+	id INT auto_increment NOT NULL,
+	rol_id INT NULL,
+	permiso_id INT NULL,
+	item_id INT NULL,
+	CONSTRAINT rol_permiso_item_pk PRIMARY KEY (id),
+	CONSTRAINT rol_permiso_item_rol_FK FOREIGN KEY (rol_id) REFERENCES proyecto_magin.rol(id),
+	CONSTRAINT rol_permiso_item_permiso_FK FOREIGN KEY (permiso_id) REFERENCES proyecto_magin.permiso(id),
+	CONSTRAINT rol_permiso_item_item_FK FOREIGN KEY (item_id) REFERENCES proyecto_magin.item(id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
